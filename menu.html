@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOODIES SPOT</title>
+</head>
+
+<body>
+
+<header>
+<h1>Welcome to Foodies Spot</h1>
+<nav>
+<a href="./index.html">Home</a>
+<a href="./login.html">Login</a>
+<a href="./register.html">Register</a>
+<a href="./menu.html">Menu</a>
+<a href="./cart.html">Cart</a>
+</nav>
+</header>
+
+<main>
+<h2>Product Catalog</h2>
+
+<div class="product-grid">
+
+<div class="product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX2w-6ljxAJtEImAJ4zBsRnou1CoSAVmgvQw&s">
+<h3>Margherita Pizza</h3>
+<p>Classic Italian pizza topped with fresh mozzarella and basil.</p>
+<p>₹299</p>
+<button onclick="addToCart('Margherita Pizza',299)">Order Now</button>
+</div>
+
+<div class="product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7W-OoBPna7eKpB2sL4xsQOAuX0QRbgqcAqA&s">
+<h3>Cheese Burger</h3>
+<p>Juicy grilled patty with cheese and special sauce.</p>
+<p>₹149</p>
+<button onclick="addToCart('Cheese Burger',149)">Order Now</button>
+</div>
+
+<div class="product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUkXT3Xjzupw-lpFOemy_uiAPTCnUYkBUdDA&s">
+<h3>Creamy White Pasta</h3>
+<p>Rich Alfredo pasta loaded with vegetables.</p>
+<p>₹249</p>
+<button onclick="addToCart('Creamy White Pasta',249)">Order Now</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/564x/c5/d2/62/c5d262f3377da91a7229772026a2ec5c.jpg">
+<h3>Hyderabadi Biryani</h3>
+<p>Aromatic basmati rice cooked with spices.</p>
+<p>₹199</p>
+<button onclick="addToCart('Hyderabadi Biryani',199)">Order Now</button>
+</div>
+
+<div class="product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToNb4qLVc8li_M2NHBfEl14DaVpUCmplY5lg&s">
+<h3>Chocolate Ice Cream</h3>
+<p>Smooth and creamy chocolate dessert.</p>
+<p>₹99</p>
+<button onclick="addToCart('Chocolate Ice Cream',99)">Order Now</button>
+</div>
+
+</div>
+</main>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({name: name, price: price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(name + " added to cart!");
+}
+</script>
+
+</body>
+</html>
