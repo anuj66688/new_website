@@ -1,23 +1,1009 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MainCrafts Technology – Transform your ideas into powerful digital solutions with cutting-edge technology and innovative development." />
+  <meta name="keywords" content="MainCrafts Technology, web design, app development, UI/UX, digital marketing, software solutions" />
+  <meta property="og:title" content="MainCrafts Technology – Build Smarter" />
+  <meta property="og:description" content="Transform your ideas into powerful digital solutions." />
+  <meta property="og:type" content="website" />
+  <title>MainCrafts Technology | Build Smarter Digital Solutions</title>
 
-    <title>FOODIES SPOT</title>
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header>
-    <h1>Welcome to Foodies Spot</h1>
-<nav>
-<a href="./index.html">Home</a>
-<a href="./login.html">Login</a>
-<a href="./register.html">Register</a>
-<a href="./menu.html">Menu</a>
-<a href="./cart.html">Cart</a>
-</nav>
-</header>
-<p>Foodies is a smart and interactive food discovery application designed to connect food lovers with the best dining experiences around them. The platform allows users to explore restaurants, browse menus, read authentic reviews, and discover trending dishes based on their preferences. With personalized recommendations powered by intelligent algorithms, Foodies helps users find exactly what they’re craving—whether it’s street food, fine dining, or home-style meals. The app also enables users to share ratings, upload food photos, and create their own foodie community. By combining convenience, social engagement, and real-time updates, Foodies transforms the way people discover, experience, and enjoy food.</p>
-<main>
 
+  <!-- ────────────────── PRELOADER ────────────────── -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <i class="fa-solid fa-cubes"></i>
+      </div>
+      <div class="preloader-ring"></div>
+      <p class="preloader-text">MainCrafts<span class="preloader-dots">...</span></p>
+    </div>
+  </div>
 
+  <!-- ──────────────────────────────────────────────
+       ANIMATED BACKGROUND PARTICLES
+  ────────────────────────────────────────────── -->
+  <div class="particles-bg" id="particlesBg" aria-hidden="true"></div>
+
+  <!-- ──────────────────────────────────────────────
+       NAVIGATION
+  ────────────────────────────────────────────── -->
+  <header>
+    <nav id="navbar" class="transparent" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="#home" class="nav-logo" aria-label="MainCrafts Technology – Go to homepage">
+          <div class="logo-icon" aria-hidden="true">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+          <span class="logo-text">MainCrafts</span>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="nav-links" role="list">
+          <li><a href="#home" class="active" aria-current="page">Home</a></li>
+          <li><a href="#features">Features</a></li>
+
+          <!-- Services dropdown -->
+          <li class="dropdown">
+            <a href="#services" aria-haspopup="true" aria-expanded="false" id="servicesDropdownTrigger">
+              Services <i class="fa-solid fa-chevron-down caret" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="servicesDropdownTrigger">
+              <li role="none">
+                <a href="#services" role="menuitem">
+                  <i class="fa-solid fa-palette" aria-hidden="true"></i>
+                  Web Design
+                </a>
+              </li>
+              <li role="none">
+                <a href="#services" role="menuitem">
+                  <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
+                  App Development
+                </a>
+              </li>
+              <li role="none">
+                <a href="#services" role="menuitem">
+                  <i class="fa-solid fa-pen-ruler" aria-hidden="true"></i>
+                  UI/UX Design
+                </a>
+              </li>
+              <li role="none">
+                <a href="#services" role="menuitem">
+                  <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                  Digital Marketing
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Desktop CTA -->
+        <div class="nav-cta">
+          <!-- Theme toggle -->
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+            <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
+          </button>
+          <a href="#contact" class="btn-nav btn-nav-outline">Sign In</a>
+          <a href="#contact" class="btn-nav btn-nav-solid">Get Started</a>
+        </div>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation" aria-modal="false">
+      <a href="#home"     id="mobileHome"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+      <a href="#features" id="mobileFeatures"><i class="fa-solid fa-star" aria-hidden="true"></i> Features</a>
+      <a href="#services" id="mobileServices"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Services</a>
+      <a href="#services" id="mobilePalette"><i class="fa-solid fa-palette" aria-hidden="true"></i> Web Design</a>
+      <a href="#services" id="mobileApp"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> App Development</a>
+      <a href="#services" id="mobileUI"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i> UI/UX Design</a>
+      <a href="#services" id="mobileDigital"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Digital Marketing</a>
+      <a href="#contact"  id="mobileContact"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ──────────────────────────────────────────────
+         HERO SECTION
+    ────────────────────────────────────────────── -->
+    <section id="home" aria-label="Hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+
+        <!-- Content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+            Next-Gen Technology Partner
+          </div>
+
+          <h1 class="hero-headline">
+            Build <span class="gradient-word">Smarter</span><br />
+            with MainCrafts
+          </h1>
+
+          <p class="hero-tagline">
+            Transform your ideas into powerful digital solutions with
+            cutting-edge technology and innovative development.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#contact" class="btn-primary" id="heroGetStarted">
+              Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a href="#features" class="btn-secondary" id="heroLearnMore">
+              <i class="fa-solid fa-play" aria-hidden="true"></i>
+              Learn More
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num" data-count="150">0</span><span class="stat-num">+</span>
+              <span class="stat-label">Projects Delivered</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-count="98">0</span><span class="stat-num">%</span>
+              <span class="stat-label">Client Satisfaction</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-count="5">0</span><span class="stat-num">+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual / Dashboard card -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card-stack">
+
+            <!-- Mini floating card — top right -->
+            <div class="floating-mini mini-card-2">
+              <div class="mini-icon cyan"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="mini-text">
+                <strong>100% Secure</strong>
+                <span>Enterprise-grade</span>
+              </div>
+            </div>
+
+            <!-- Main dashboard card -->
+            <div class="floating-card main-card">
+              <div class="card-header">
+                <div class="card-avatar"><i class="fa-solid fa-rocket"></i></div>
+                <div class="card-info">
+                  <h4>Project Overview</h4>
+                  <p>MainCrafts Dashboard</p>
+                </div>
+                <div class="card-status">● Live</div>
+              </div>
+
+              <div class="progress-bars">
+                <div class="progress-item">
+                  <label>
+                    <span>Performance</span>
+                    <span>92%</span>
+                  </label>
+                  <div class="progress-track">
+                    <div class="progress-fill fill-purple" style="width:92%"></div>
+                  </div>
+                </div>
+
+                <div class="progress-item">
+                  <label>
+                    <span>Scalability</span>
+                    <span>87%</span>
+                  </label>
+                  <div class="progress-track">
+                    <div class="progress-fill fill-cyan" style="width:87%"></div>
+                  </div>
+                </div>
+
+                <div class="progress-item">
+                  <label>
+                    <span>Security Score</span>
+                    <span>99%</span>
+                  </label>
+                  <div class="progress-track">
+                    <div class="progress-fill fill-pink" style="width:99%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mini floating card — bottom left -->
+            <div class="floating-mini mini-card-1">
+              <div class="mini-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+              <div class="mini-text">
+                <strong>+48% Growth</strong>
+                <span>This quarter</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="mouse"></div>
+        <span>Scroll down</span>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         FEATURES SECTION
+    ────────────────────────────────────────────── -->
+    <section id="features" aria-label="Features">
+      <div class="container">
+
+        <div class="features-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            Why Choose Us
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">
+            Everything You Need to<br /><span>Scale Your Business</span>
+          </h2>
+          <p class="section-sub reveal reveal-delay-2">
+            We combine performance, responsiveness, scalability, and security into
+            every solution we build — so you never have to compromise.
+          </p>
+        </div>
+
+        <div class="features-grid">
+
+          <!-- Card 1 – Fast -->
+          <article class="feature-card reveal reveal-delay-1" id="featureFast">
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3>Fast</h3>
+            <p>Lightning-fast performance and optimized solutions that keep your users engaged and satisfied.</p>
+          </article>
+
+          <!-- Card 2 – Responsive -->
+          <article class="feature-card reveal reveal-delay-2" id="featureResponsive">
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <h3>Responsive</h3>
+            <p>Perfect experience across desktop, tablet, and mobile devices — every pixel, perfectly placed.</p>
+          </article>
+
+          <!-- Card 3 – Scalable -->
+          <article class="feature-card reveal reveal-delay-3" id="featureScalable">
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-server"></i>
+            </div>
+            <h3>Scalable</h3>
+            <p>Built to grow with your business requirements — from startup launch to enterprise expansion.</p>
+          </article>
+
+          <!-- Card 4 – Secure -->
+          <article class="feature-card reveal reveal-delay-4" id="featureSecure">
+            <div class="feature-icon-wrap" aria-hidden="true">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>Secure</h3>
+            <p>Enterprise-grade security and data protection that keeps your business and clients safe.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         SERVICES SECTION
+    ────────────────────────────────────────────── -->
+    <section id="services" aria-label="Services">
+      <div class="container">
+
+        <div class="services-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+            Our Services
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">
+            Solutions That <span>Drive Results</span>
+          </h2>
+          <p class="section-sub reveal reveal-delay-2">
+            From concept to launch — we cover every dimension of your digital presence
+            with precision and passion.
+          </p>
+        </div>
+
+        <div class="services-grid">
+
+          <!-- Web Design -->
+          <article class="service-card reveal reveal-left reveal-delay-1" id="serviceWebDesign">
+            <div class="service-icon si-purple" aria-hidden="true">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+            <div class="service-body">
+              <h3>Web Design</h3>
+              <p>Stunning, conversion-focused websites that blend beautiful aesthetics with seamless functionality and great UX.</p>
+              <div class="service-tags">
+                <span class="tag">UI/UX</span>
+                <span class="tag">Figma</span>
+                <span class="tag">Responsive</span>
+                <span class="tag">Animations</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- App Development -->
+          <article class="service-card reveal reveal-right reveal-delay-2" id="serviceAppDev">
+            <div class="service-icon si-cyan" aria-hidden="true">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <div class="service-body">
+              <h3>App Development</h3>
+              <p>Cross-platform mobile and web applications built with modern frameworks for peak performance.</p>
+              <div class="service-tags">
+                <span class="tag">React Native</span>
+                <span class="tag">Flutter</span>
+                <span class="tag">iOS</span>
+                <span class="tag">Android</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- UI/UX Design -->
+          <article class="service-card reveal reveal-left reveal-delay-3" id="serviceUIUX">
+            <div class="service-icon si-pink" aria-hidden="true">
+              <i class="fa-solid fa-pen-ruler"></i>
+            </div>
+            <div class="service-body">
+              <h3>UI/UX Design</h3>
+              <p>User-centered design processes that create intuitive, delightful experiences users love to interact with.</p>
+              <div class="service-tags">
+                <span class="tag">Wireframing</span>
+                <span class="tag">Prototyping</span>
+                <span class="tag">User Testing</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Digital Marketing -->
+          <article class="service-card reveal reveal-right reveal-delay-4" id="serviceMarketing">
+            <div class="service-icon si-amber" aria-hidden="true">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="service-body">
+              <h3>Digital Marketing</h3>
+              <p>Data-driven marketing strategies that amplify your brand, grow your audience, and maximize ROI.</p>
+              <div class="service-tags">
+                <span class="tag">SEO</span>
+                <span class="tag">SEM</span>
+                <span class="tag">Social Media</span>
+                <span class="tag">Analytics</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         HOW IT WORKS SECTION
+    ────────────────────────────────────────────── -->
+    <section id="process" aria-label="How It Works">
+      <div class="container">
+        <div class="process-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+            Our Process
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">How We <span>Bring Ideas to Life</span></h2>
+          <p class="section-sub reveal reveal-delay-2">A proven 4-step framework that turns your vision into a polished digital product — on time, every time.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-step reveal reveal-delay-1" id="step1">
+            <div class="step-number">01</div>
+            <div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>Discovery</h3>
+            <p>We deep-dive into your goals, audience, and market to create a crystal-clear blueprint for success.</p>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+          <div class="process-step reveal reveal-delay-2" id="step2">
+            <div class="step-number">02</div>
+            <div class="step-icon"><i class="fa-solid fa-pen-nib"></i></div>
+            <h3>Design</h3>
+            <p>Our designers craft stunning, user-centric interfaces that communicate your brand and delight users.</p>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+          <div class="process-step reveal reveal-delay-3" id="step3">
+            <div class="step-number">03</div>
+            <div class="step-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Develop</h3>
+            <p>Expert engineers build robust, scalable solutions using the best-fit technology stack for your needs.</p>
+            <div class="step-connector" aria-hidden="true"></div>
+          </div>
+          <div class="process-step reveal reveal-delay-4" id="step4">
+            <div class="step-number">04</div>
+            <div class="step-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3>Launch</h3>
+            <p>We deploy, monitor, and refine your product — ensuring a smooth go-live and ongoing optimization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         TECH STACK SECTION
+    ────────────────────────────────────────────── -->
+    <section id="techstack" aria-label="Technologies We Use">
+      <div class="container">
+        <div class="tech-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+            Tech Stack
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">Built With <span>Industry-Leading</span> Tools</h2>
+        </div>
+      </div>
+      <div class="tech-marquee-wrap" aria-hidden="true">
+        <div class="tech-marquee" id="techMarquee">
+          <div class="tech-marquee-inner">
+            <div class="tech-pill"><i class="fa-brands fa-react"></i> React</div>
+            <div class="tech-pill"><i class="fa-brands fa-node-js"></i> Node.js</div>
+            <div class="tech-pill"><i class="fa-brands fa-python"></i> Python</div>
+            <div class="tech-pill"><i class="fa-brands fa-aws"></i> AWS</div>
+            <div class="tech-pill"><i class="fa-brands fa-docker"></i> Docker</div>
+            <div class="tech-pill"><i class="fa-brands fa-git-alt"></i> Git</div>
+            <div class="tech-pill"><i class="fa-brands fa-figma"></i> Figma</div>
+            <div class="tech-pill"><i class="fa-brands fa-js"></i> TypeScript</div>
+            <div class="tech-pill"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+            <div class="tech-pill"><i class="fa-brands fa-angular"></i> Angular</div>
+            <div class="tech-pill"><i class="fa-solid fa-database"></i> MongoDB</div>
+            <div class="tech-pill"><i class="fa-brands fa-google"></i> Firebase</div>
+            <!-- duplicate for seamless loop -->
+            <div class="tech-pill"><i class="fa-brands fa-react"></i> React</div>
+            <div class="tech-pill"><i class="fa-brands fa-node-js"></i> Node.js</div>
+            <div class="tech-pill"><i class="fa-brands fa-python"></i> Python</div>
+            <div class="tech-pill"><i class="fa-brands fa-aws"></i> AWS</div>
+            <div class="tech-pill"><i class="fa-brands fa-docker"></i> Docker</div>
+            <div class="tech-pill"><i class="fa-brands fa-git-alt"></i> Git</div>
+            <div class="tech-pill"><i class="fa-brands fa-figma"></i> Figma</div>
+            <div class="tech-pill"><i class="fa-brands fa-js"></i> TypeScript</div>
+            <div class="tech-pill"><i class="fa-brands fa-vuejs"></i> Vue.js</div>
+            <div class="tech-pill"><i class="fa-brands fa-angular"></i> Angular</div>
+            <div class="tech-pill"><i class="fa-solid fa-database"></i> MongoDB</div>
+            <div class="tech-pill"><i class="fa-brands fa-google"></i> Firebase</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         TESTIMONIALS SECTION
+    ────────────────────────────────────────────── -->
+    <section id="testimonials" aria-label="Client Testimonials">
+      <div class="container">
+        <div class="testimonials-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            Testimonials
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">Loved by <span>Clients Worldwide</span></h2>
+          <p class="section-sub reveal reveal-delay-2">Don't take our word for it — hear what our clients have to say about working with MainCrafts.</p>
+        </div>
+        <div class="testimonials-slider-wrap reveal">
+          <div class="testimonials-track" id="testimonialsTrack">
+
+            <article class="testimonial-card" id="tCard1">
+              <div class="tcard-stars">★★★★★</div>
+              <p class="tcard-quote">"MainCrafts transformed our outdated website into a stunning, high-performing platform. Our conversion rate jumped 68% in the first month!"</p>
+              <div class="tcard-author">
+                <div class="tcard-avatar" style="background:linear-gradient(135deg,#6366f1,#a855f7)">JR</div>
+                <div>
+                  <strong>Jessica Roberts</strong>
+                  <span>CEO, NovaBrand Studio</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card" id="tCard2">
+              <div class="tcard-stars">★★★★★</div>
+              <p class="tcard-quote">"The app they built for us handles 50,000+ daily users without breaking a sweat. Excellent architecture and incredible attention to detail."</p>
+              <div class="tcard-author">
+                <div class="tcard-avatar" style="background:linear-gradient(135deg,#06b6d4,#6366f1)">MC</div>
+                <div>
+                  <strong>Marcus Chen</strong>
+                  <span>CTO, FlowMetrics Inc.</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card" id="tCard3">
+              <div class="tcard-stars">★★★★★</div>
+              <p class="tcard-quote">"From the discovery call to launch day, MainCrafts was a true partner. They didn't just build what we asked — they improved upon our vision."</p>
+              <div class="tcard-author">
+                <div class="tcard-avatar" style="background:linear-gradient(135deg,#ec4899,#a855f7)">AK</div>
+                <div>
+                  <strong>Aisha Kamara</strong>
+                  <span>Founder, LumenLeaf Wellness</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card" id="tCard4">
+              <div class="tcard-stars">★★★★★</div>
+              <p class="tcard-quote">"Our digital marketing campaigns now generate 3x more qualified leads. The team is responsive, creative, and always delivers above expectations."</p>
+              <div class="tcard-author">
+                <div class="tcard-avatar" style="background:linear-gradient(135deg,#f59e0b,#f97316)">DM</div>
+                <div>
+                  <strong>Daniel Moore</strong>
+                  <span>Marketing Director, PeakSales Co.</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+          <!-- Slider controls -->
+          <div class="slider-controls">
+            <button class="slider-btn" id="sliderPrev" aria-label="Previous testimonial">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="slider-dots" id="sliderDots"></div>
+            <button class="slider-btn" id="sliderNext" aria-label="Next testimonial">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         PRICING SECTION
+    ────────────────────────────────────────────── -->
+    <section id="pricing" aria-label="Pricing Plans">
+      <div class="container">
+        <div class="pricing-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-tag" aria-hidden="true"></i>
+            Pricing
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">Simple, <span>Transparent Pricing</span></h2>
+          <p class="section-sub reveal reveal-delay-2">No hidden fees. Choose the plan that fits your needs and scale anytime.</p>
+          <!-- Billing toggle -->
+          <div class="billing-toggle reveal reveal-delay-3">
+            <span class="billing-label" id="labelMonthly">Monthly</span>
+            <button class="toggle-switch" id="billingToggle" aria-label="Toggle billing period" aria-pressed="false">
+              <span class="toggle-thumb"></span>
+            </button>
+            <span class="billing-label" id="labelYearly">Yearly <span class="save-badge">Save 20%</span></span>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+
+          <!-- Starter -->
+          <div class="pricing-card reveal reveal-delay-1" id="pricingStarter">
+            <div class="pricing-plan-name">Starter</div>
+            <div class="pricing-price">
+              <span class="price-currency">$</span>
+              <span class="price-amount" data-monthly="0" data-yearly="0">0</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <p class="pricing-desc">Perfect for freelancers and personal projects.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> 1 Project</li>
+              <li><i class="fa-solid fa-check"></i> Basic UI Components</li>
+              <li><i class="fa-solid fa-check"></i> Community Support</li>
+              <li><i class="fa-solid fa-check"></i> 5 GB Storage</li>
+              <li class="disabled"><i class="fa-solid fa-xmark"></i> Custom Domain</li>
+              <li class="disabled"><i class="fa-solid fa-xmark"></i> Analytics Dashboard</li>
+            </ul>
+            <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started Free</a>
+          </div>
+
+          <!-- Pro (featured) -->
+          <div class="pricing-card pricing-featured reveal reveal-delay-2" id="pricingPro">
+            <div class="pricing-popular">Most Popular</div>
+            <div class="pricing-plan-name">Pro</div>
+            <div class="pricing-price">
+              <span class="price-currency">$</span>
+              <span class="price-amount" data-monthly="49" data-yearly="39">49</span>
+              <span class="price-period">/mo</span>
+            </div>
+            <p class="pricing-desc">For growing teams that need power and flexibility.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> 10 Projects</li>
+              <li><i class="fa-solid fa-check"></i> Premium UI Library</li>
+              <li><i class="fa-solid fa-check"></i> Priority Email Support</li>
+              <li><i class="fa-solid fa-check"></i> 50 GB Storage</li>
+              <li><i class="fa-solid fa-check"></i> Custom Domain</li>
+              <li><i class="fa-solid fa-check"></i> Analytics Dashboard</li>
+            </ul>
+            <a href="#contact" class="pricing-btn pricing-btn-solid">Start Pro Plan</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card reveal reveal-delay-3" id="pricingEnterprise">
+            <div class="pricing-plan-name">Enterprise</div>
+            <div class="pricing-price">
+              <span class="price-currency"></span>
+              <span class="price-amount" data-monthly="Custom" data-yearly="Custom">Custom</span>
+              <span class="price-period"></span>
+            </div>
+            <p class="pricing-desc">Tailored solutions for large-scale organizations.</p>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Unlimited Projects</li>
+              <li><i class="fa-solid fa-check"></i> White-label Solution</li>
+              <li><i class="fa-solid fa-check"></i> 24/7 Dedicated Support</li>
+              <li><i class="fa-solid fa-check"></i> Unlimited Storage</li>
+              <li><i class="fa-solid fa-check"></i> Custom Domain + CDN</li>
+              <li><i class="fa-solid fa-check"></i> Advanced Analytics + API</li>
+            </ul>
+            <a href="#contact" class="pricing-btn pricing-btn-outline">Contact Sales</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         FAQ SECTION
+    ────────────────────────────────────────────── -->
+    <section id="faq" aria-label="Frequently Asked Questions">
+      <div class="container">
+        <div class="faq-header">
+          <div class="section-badge reveal">
+            <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+            FAQ
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">Frequently Asked <span>Questions</span></h2>
+          <p class="section-sub reveal reveal-delay-2">Everything you need to know about working with MainCrafts Technology.</p>
+        </div>
+        <div class="faq-list reveal">
+
+          <div class="faq-item" id="faq1">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer1">
+              <span>How long does a typical project take?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer1" role="region">
+              <p>Project timelines vary based on complexity. A landing page typically takes 1–2 weeks, while a full web application can take 6–12 weeks. We provide a detailed timeline during the discovery phase so you always know what to expect.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq2">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer2">
+              <span>What technologies do you specialize in?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer2" role="region">
+              <p>We work with React, Next.js, Vue, Node.js, Python, AWS, Firebase, and many more. Our team selects the best-fit stack for your specific project requirements, not just what's trendy.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq3">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer3">
+              <span>Do you offer post-launch support and maintenance?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer3" role="region">
+              <p>Absolutely. We offer flexible maintenance packages — from monthly retainers to on-demand support. Your product will continue to evolve with your business needs.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq4">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer4">
+              <span>Can you work with an existing design or codebase?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer4" role="region">
+              <p>Yes! We frequently collaborate with in-house teams, work from existing Figma files, and extend or refactor legacy codebases. We adapt to your workflow, not the other way around.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq5">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer5">
+              <span>How is pricing determined for custom projects?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer5" role="region">
+              <p>Custom project pricing is based on scope, complexity, and timeline. After our free discovery call, we provide a detailed proposal with a fixed price — no surprise invoices, ever.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" id="faq6">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer6">
+              <span>What is your revision and feedback process?</span>
+              <i class="fa-solid fa-plus faq-icon" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer" id="faqAnswer6" role="region">
+              <p>We operate in sprints with regular check-ins. Every milestone includes a review round where you can provide feedback. We include two rounds of revisions per deliverable at no extra cost.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────
+         CONTACT SECTION
+    ────────────────────────────────────────────── -->
+    <section id="contact" aria-label="Contact Us">
+      <div class="container">
+        <div class="contact-inner">
+
+          <!-- Info -->
+          <div class="contact-info reveal reveal-left">
+            <div class="section-badge">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              Get In Touch
+            </div>
+            <h2>
+              Let's Build Something<br /><span>Amazing Together</span>
+            </h2>
+            <p>
+              Ready to transform your digital presence? Tell us about your project
+              and we'll get back to you within 24 hours.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-item-icon purple" aria-hidden="true">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Email Us</strong>
+                  <span>hello@maincrafts.tech</span>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon cyan" aria-hidden="true">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Call Us</strong>
+                  <span>+1 (555) 234-5678</span>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-item-icon pink" aria-hidden="true">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact-item-text">
+                  <strong>Location</strong>
+                  <span>San Francisco, CA 94102</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="contact-form-card reveal reveal-right">
+
+            <!-- The form -->
+            <form id="contactForm" novalidate aria-label="Contact form">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    class="form-control"
+                    placeholder="John"
+                    autocomplete="given-name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    class="form-control"
+                    placeholder="Doe"
+                    autocomplete="family-name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="emailInput">Email Address</label>
+                <input
+                  type="email"
+                  id="emailInput"
+                  name="email"
+                  class="form-control"
+                  placeholder="john@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="subjectInput">Subject</label>
+                <input
+                  type="text"
+                  id="subjectInput"
+                  name="subject"
+                  class="form-control"
+                  placeholder="How can we help?"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="messageInput">Message</label>
+                <textarea
+                  id="messageInput"
+                  name="message"
+                  class="form-control"
+                  placeholder="Tell us about your project..."
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-submit" id="contactSubmit">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                Send Message
+              </button>
+
+            </form>
+
+            <!-- Success state -->
+            <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+              <div class="success-icon" aria-hidden="true">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h4>Message Sent!</h4>
+              <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ──────────────────────────────────────────────
+       FOOTER
+  ────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo" aria-label="MainCrafts Technology homepage">
+            <div class="logo-icon" aria-hidden="true"><i class="fa-solid fa-cubes"></i></div>
+            <span class="logo-text">MainCrafts</span>
+          </a>
+          <p class="footer-tagline">
+            Transforming ideas into powerful digital solutions since 2020.
+            We build technology that drives business growth.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Twitter/X profile">
+              <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn profile">
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="GitHub profile">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram profile">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube channel">
+              <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Company links -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#home">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Services links -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Web Design</a></li>
+            <li><a href="#services">App Development</a></li>
+            <li><a href="#services">UI/UX Design</a></li>
+            <li><a href="#services">Digital Marketing</a></li>
+            <li><a href="#">Consulting</a></li>
+          </ul>
+        </div>
+
+        <!-- Support links -->
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom bar -->
+      <div class="footer-bottom">
+        <p>© 2025 MainCrafts Technology. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Scroll back to top">
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- COOKIE CONSENT BANNER -->
+  <div class="cookie-banner" id="cookieBanner" role="alertdialog" aria-label="Cookie consent" aria-live="polite">
+    <div class="cookie-content">
+      <div class="cookie-icon" aria-hidden="true">🍪</div>
+      <p>We use cookies to enhance your experience and analyze site performance. <a href="#">Learn more</a>.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
+      <button class="cookie-btn cookie-accept" id="cookieAccept">Accept All</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
 </html>
