@@ -1,0 +1,113 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ══════════════════════════════════════════════════════════
+    //  CONTACTS COLLECTION
+    //  Anyone can CREATE (submit the contact form).
+    //  Only authenticated admins can READ, UPDATE, DELETE.
+    // ══════════════════════════════════════════════════════════
+    match /contacts/{docId} {
+      allow create: if
+        // Must have all required fields
+        request.resource.data.keys().hasAll(['name', 'email', 'message', 'createdAt'])
+
+        // name: non-empty string, ≤ 100 chars
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 100
+
+        // email: basic format check (length guard)
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 5
+        && request.resource.data.email.size() <= 254
+
+        // message: non-empty, ≤ 5 000 chars
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 5000
+
+        // createdAt must be a server timestamp
+        && request.resource.data.createdAt == request.time
+
+        // Rate limiting: disallow extra / unexpected fields
+        && request.resource.data.keys().hasOnly(
+            ['name', 'email', 'message', 'subject', 'createdAt', 'source', 'status']
+           );
+
+      // Public cannot read, update, or delete
+      allow read, update, delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    //  NEWSLETTER SUBSCRIBERS
+    //  Anyone can CREATE.  No public read / write / delete.
+    // ══════════════════════════════════════════════════════════
+    match /newsletter_subscribers/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['email', 'subscribedAt'])
+
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 5
+        && request.resource.data.email.size() <= 254
+
+        && request.resource.data.subscribedAt == request.time
+
+        && request.resource.data.keys().hasOnly(
+            ['email', 'name', 'subscribedAt', 'source', 'status', 'preferences']
+           );
+
+      allow read, update, delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    //  CTA CLICKS  (analytics)
+    //  Anyone can CREATE.  No public read / write / delete.
+    // ══════════════════════════════════════════════════════════
+    match /cta_clicks/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['buttonId', 'clickedAt'])
+
+        && request.resource.data.buttonId is string
+        && request.resource.data.buttonId.size() <= 100
+
+        && request.resource.data.clickedAt == request.time
+
+        && request.resource.data.keys().hasOnly(
+            ['buttonId', 'buttonText', 'section', 'sessionId', 'device', 'clickedAt']
+           );
+
+      allow read, update, delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    //  ANALYTICS EVENTS  (generic events)
+    //  Anyone can CREATE.  No public read / write / delete.
+    // ══════════════════════════════════════════════════════════
+    match /analytics_events/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll(['eventName', 'loggedAt'])
+
+        && request.resource.data.eventName is string
+        && request.resource.data.eventName.size() >= 1
+        && request.resource.data.eventName.size() <= 100
+
+        && request.resource.data.loggedAt == request.time
+
+        && request.resource.data.keys().hasOnly(
+            ['eventName', 'eventData', 'sessionId', 'device', 'loggedAt']
+           );
+
+      allow read, update, delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    //  DEFAULT — deny everything not explicitly allowed above
+    // ══════════════════════════════════════════════════════════
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+  }
+}

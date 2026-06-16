@@ -157,10 +157,12 @@
           </p>
 
           <div class="hero-cta">
-            <a href="#contact" class="btn-primary" id="heroGetStarted">
+            <a href="#contact" class="btn-primary" id="heroGetStarted"
+               data-track-btn="heroGetStarted" data-track-section="hero">
               Get Started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </a>
-            <a href="#features" class="btn-secondary" id="heroLearnMore">
+            <a href="#features" class="btn-secondary" id="heroLearnMore"
+               data-track-btn="heroLearnMore" data-track-section="hero">
               <i class="fa-solid fa-play" aria-hidden="true"></i>
               Learn More
             </a>
@@ -897,6 +899,69 @@
       </div>
     </section>
 
+    <!-- ──────────────────────────────────────────────
+         NEWSLETTER SECTION
+    ────────────────────────────────────────────── -->
+    <section id="newsletter" aria-label="Newsletter Subscription" style="padding:5rem 0;background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(168,85,247,0.08));">
+      <div class="container">
+        <div style="max-width:620px;margin:0 auto;text-align:center;">
+
+          <div class="section-badge reveal" style="display:inline-flex;margin-bottom:1.2rem;">
+            <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+            Newsletter
+          </div>
+          <h2 class="section-title reveal reveal-delay-1">
+            Stay <span>In The Loop</span>
+          </h2>
+          <p class="section-sub reveal reveal-delay-2" style="margin-bottom:2.5rem;">
+            Get the latest insights, tips, and updates from MainCrafts
+            delivered straight to your inbox. No spam, ever.
+          </p>
+
+          <form id="newsletterForm" novalidate aria-label="Newsletter subscription form"
+                class="reveal reveal-delay-3"
+                style="display:flex;flex-direction:column;gap:1rem;">
+
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <input
+                type="text"
+                id="newsletterName"
+                name="name"
+                class="form-control"
+                placeholder="Your name (optional)"
+                autocomplete="given-name"
+                style="flex:1;min-width:180px;"
+              />
+              <input
+                type="email"
+                id="newsletterEmail"
+                name="email"
+                class="form-control"
+                placeholder="your@email.com"
+                autocomplete="email"
+                required
+                style="flex:2;min-width:200px;"
+              />
+            </div>
+
+            <button type="submit" class="btn-submit" id="newsletterSubmit"
+                    data-track-btn="newsletterSubscribe" data-track-section="newsletter"
+                    style="align-self:center;min-width:200px;">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              Subscribe Now
+            </button>
+
+          </form>
+
+          <p style="margin-top:1rem;font-size:0.78rem;opacity:0.5;">
+            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+            We respect your privacy. Unsubscribe at any time.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ──────────────────────────────────────────────
@@ -1004,6 +1069,9 @@
 
   <!-- JavaScript -->
   <script src="script.js"></script>
+
+  <!-- Firebase SDK v9 (Modular) — loaded as ES Module -->
+  <script type="module" src="firebase/firebaseUI.js"></script>
 
 </body>
 </html>
