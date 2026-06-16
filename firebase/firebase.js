@@ -4,9 +4,10 @@
 //  SDK v9 Modular Syntax (CDN — no bundler needed)
 // ============================================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAnalytics }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore }    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAnalytics }    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getAuth }         from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // ── Your Firebase project config ─────────────────────────────
 const firebaseConfig = {
@@ -21,6 +22,7 @@ const firebaseConfig = {
 // ── Initialise Firebase ───────────────────────────────────────
 const app       = initializeApp(firebaseConfig);
 const db        = getFirestore(app);
+const auth      = getAuth(app);
 const analytics = getAnalytics(app);
 
-export { app, db, analytics };
+export { app, db, auth, analytics };

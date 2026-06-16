@@ -102,8 +102,9 @@
           <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
             <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
           </button>
-          <a href="#contact" class="btn-nav btn-nav-outline">Sign In</a>
-          <a href="#contact" class="btn-nav btn-nav-solid">Get Started</a>
+          <a href="auth.html" class="btn-nav btn-nav-outline" id="navSignIn">Sign In</a>
+          <a href="auth.html" class="btn-nav btn-nav-solid"   id="navGetStarted"
+             data-track-btn="navGetStarted" data-track-section="navbar">Get Started</a>
         </div>
 
         <!-- Hamburger -->
@@ -1072,6 +1073,42 @@
 
   <!-- Firebase SDK v9 (Modular) — loaded as ES Module -->
   <script type="module" src="firebase/firebaseUI.js"></script>
+
+  <!-- Auth state — dynamically update navbar -->
+  <script type="module">
+    import { onAuthChange, logoutUser } from "./firebase/services/index.js";
+
+    onAuthChange((user) => {
+      const signInBtn     = document.getElementById("navSignIn");
+      const getStartedBtn = document.getElementById("navGetStarted");
+      if (!signInBtn || !getStartedBtn) return;
+
+      if (user) {
+        // Replace Sign In with user initial avatar
+        const name     = user.displayName || user.email || "U";
+        const initial  = name[0].toUpperCase();
+        signInBtn.innerHTML  = `<i class="fa-solid fa-user"></i> ${name.split(" ")[0]}`;
+        signInBtn.href       = "auth.html";
+        getStartedBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Sign Out`;
+        getStartedBtn.style.background = "rgba(248,113,113,0.15)";
+        getStartedBtn.style.borderColor = "rgba(248,113,113,0.4)";
+        getStartedBtn.style.color       = "#f87171";
+        getStartedBtn.removeAttribute("href");
+        getStartedBtn.style.cursor = "pointer";
+        getStartedBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await logoutUser();
+          window.location.reload();
+        }, { once: true });
+      } else {
+        signInBtn.innerHTML  = "Sign In";
+        signInBtn.href       = "auth.html";
+        getStartedBtn.innerHTML = "Get Started";
+        getStartedBtn.href   = "auth.html";
+        getStartedBtn.style  = "";
+      }
+    });
+  </script>
 
 </body>
 </html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in or create a MainCrafts Technology account." />
+  <title>Sign In / Register — MainCrafts Technology</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:  #6366f1;
+      --violet:  #a855f7;
+      --cyan:    #06b6d4;
+      --pink:    #ec4899;
+      --bg:      #0a0a0f;
+      --surface: #12121a;
+      --card:    #1a1a28;
+      --border:  rgba(255,255,255,0.08);
+      --text:    #f1f5f9;
+      --muted:   #94a3b8;
+      --error:   #f87171;
+      --success: #34d399;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Animated background ─────────────────────── */
+    .auth-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .auth-bg::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+      animation: floatBlob 12s ease-in-out infinite alternate;
+    }
+    .auth-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+      animation: floatBlob 15s ease-in-out infinite alternate-reverse;
+    }
+    .blob-3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+      animation: floatBlob 18s ease-in-out infinite;
+    }
+    @keyframes floatBlob {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.1); }
+    }
+
+    /* Grid lines */
+    .grid-lines {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    /* ── Layout ──────────────────────────────────── */
+    .auth-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px;
+      padding: 1.5rem;
+      animation: fadeSlideUp 0.6s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Logo ────────────────────────────────────── */
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    .auth-logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple), var(--violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .auth-logo-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Card ────────────────────────────────────── */
+    .auth-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 0 0 1px rgba(99,102,241,0.1),
+        0 32px 64px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* ── Tab Toggle ──────────────────────────────── */
+    .auth-tabs {
+      display: flex;
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .auth-tab.active {
+      background: linear-gradient(135deg, var(--purple), var(--violet));
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(99,102,241,0.4);
+    }
+
+    /* ── Headings ────────────────────────────────── */
+    .auth-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .auth-title span {
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .auth-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── Google Button ───────────────────────────── */
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+    }
+    .btn-google:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(99,102,241,0.4);
+      transform: translateY(-1px);
+    }
+    .btn-google img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ── Divider ─────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Form ────────────────────────────────────── */
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.02em;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.6rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: var(--purple);
+      background: rgba(99,102,241,0.05);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+    }
+    .form-control:focus + .focus-ring { opacity: 1; }
+    .form-control::placeholder { color: rgba(148,163,184,0.4); }
+
+    /* Password toggle */
+    .pw-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: var(--text); }
+
+    /* ── Field error ─────────────────────────────── */
+    .field-error {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--error);
+      margin-top: 5px;
+    }
+    .form-control.error-state {
+      border-color: var(--error) !important;
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.12) !important;
+    }
+
+    /* ── Password strength ───────────────────────── */
+    .pw-strength {
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .pw-strength.show { display: block; }
+    .pw-strength-bar {
+      height: 3px;
+      border-radius: 99px;
+      background: var(--border);
+      overflow: hidden;
+      margin-bottom: 0.3rem;
+    }
+    .pw-strength-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s ease, background 0.4s ease;
+    }
+    .pw-strength-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── Forgot password ─────────────────────────── */
+    .forgot-link {
+      font-size: 0.8rem;
+      color: var(--purple);
+      text-decoration: none;
+      float: right;
+      margin-top: -0.2rem;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover { color: var(--violet); }
+
+    /* ── Submit button ───────────────────────────── */
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: linear-gradient(135deg, var(--purple), var(--violet));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.02em;
+    }
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0);
+      transition: background 0.3s;
+    }
+    .btn-submit:hover::before { background: rgba(255,255,255,0.08); }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.45); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    /* ── Alert box ───────────────────────────────── */
+    .auth-alert {
+      display: none;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      animation: fadeIn 0.3s ease;
+    }
+    .auth-alert.show { display: flex; }
+    .auth-alert.error   { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25); color: var(--error); }
+    .auth-alert.success { background: rgba(52,211,153,0.1);  border: 1px solid rgba(52,211,153,0.25);  color: var(--success); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Terms ───────────────────────────────────── */
+    .auth-terms {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+    .auth-terms a { color: var(--purple); text-decoration: none; }
+    .auth-terms a:hover { text-decoration: underline; }
+
+    /* ── Form panels ─────────────────────────────── */
+    .auth-panel { display: none; }
+    .auth-panel.active { display: block; }
+
+    /* ── Forgot password panel ───────────────────── */
+    #resetPanel { display: none; }
+    #resetPanel.active { display: block; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      cursor: pointer;
+      margin-bottom: 1.2rem;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── Checkbox ────────────────────────────────── */
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+    .check-row input[type="checkbox"] {
+      accent-color: var(--purple);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .check-row label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .check-row label a { color: var(--purple); text-decoration: none; }
+
+    /* ── User welcome (post login) ───────────────── */
+    #welcomePanel {
+      display: none;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    #welcomePanel.active { display: block; }
+    .welcome-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--violet));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.2rem;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(99,102,241,0.4);
+    }
+    .welcome-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .welcome-email {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .btn-dashboard {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(135deg, var(--purple), var(--violet));
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 1rem;
+      width: 100%;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .btn-dashboard:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.7rem 1.5rem;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    .btn-logout:hover { border-color: var(--error); color: var(--error); }
+
+    /* ── Footer link ─────────────────────────────── */
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .auth-footer a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 520px) {
+      .auth-card { padding: 2rem 1.25rem; border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="auth-bg" aria-hidden="true">
+    <div class="blob-3"></div>
+  </div>
+  <div class="grid-lines" aria-hidden="true"></div>
+
+  <div class="auth-wrapper">
+
+    <!-- Logo -->
+    <a href="index.html" class="auth-logo" aria-label="MainCrafts Technology — Back to homepage">
+      <div class="auth-logo-icon"><i class="fa-solid fa-cubes"></i></div>
+      <span class="auth-logo-text">MainCrafts</span>
+    </a>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- ── Welcome panel (shown when already logged in) ── -->
+      <div id="welcomePanel">
+        <div class="welcome-avatar" id="welcomeAvatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <p class="welcome-name" id="welcomeName">Welcome back!</p>
+        <p class="welcome-email" id="welcomeEmail"></p>
+        <a href="index.html" class="btn-dashboard">
+          <i class="fa-solid fa-house"></i> Back to Website
+        </a>
+        <button class="btn-logout" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+
+      <!-- ── Auth panels (login / register / reset) ── -->
+      <div id="authPanels">
+
+        <!-- Tab Toggle -->
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tabLogin"    role="tab" aria-selected="true"  aria-controls="loginPanel">Sign In</button>
+          <button class="auth-tab"        id="tabRegister" role="tab" aria-selected="false" aria-controls="registerPanel">Register</button>
+        </div>
+
+        <!-- Global Alert -->
+        <div class="auth-alert" id="authAlert" role="alert" aria-live="polite">
+          <i class="fa-solid fa-circle-exclamation" id="alertIcon"></i>
+          <span id="alertMsg"></span>
+        </div>
+
+        <!-- ── LOGIN PANEL ── -->
+        <div class="auth-panel active" id="loginPanel" role="tabpanel">
+          <h1 class="auth-title">Welcome <span>Back</span></h1>
+          <p class="auth-subtitle">Sign in to your MainCrafts account</p>
+
+          <!-- Google -->
+          <button class="btn-google" id="googleLoginBtn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" />
+            Continue with Google
+          </button>
+
+          <div class="divider">or continue with email</div>
+
+          <form id="loginForm" novalidate>
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="loginPassword">
+                Password
+                <button type="button" class="forgot-link" id="showResetBtn">Forgot password?</button>
+              </label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" autocomplete="current-password" required />
+                <button type="button" class="pw-toggle" id="pwToggleLogin" aria-label="Toggle password visibility">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="loginSubmit">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign In
+            </button>
+          </form>
+        </div>
+
+        <!-- ── REGISTER PANEL ── -->
+        <div class="auth-panel" id="registerPanel" role="tabpanel">
+          <h1 class="auth-title">Create <span>Account</span></h1>
+          <p class="auth-subtitle">Join MainCrafts Technology today — it's free</p>
+
+          <!-- Google -->
+          <button class="btn-google" id="googleRegisterBtn">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" />
+            Continue with Google
+          </button>
+
+          <div class="divider">or create with email</div>
+
+          <form id="registerForm" novalidate>
+            <div class="form-group">
+              <label for="regName">Full Name</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-user input-icon"></i>
+                <input type="text" id="regName" class="form-control" placeholder="John Doe" autocomplete="name" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail">Email Address</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input type="email" id="regEmail" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regPassword">Password</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" id="regPassword" class="form-control" placeholder="Min. 6 characters" autocomplete="new-password" required />
+                <button type="button" class="pw-toggle" id="pwToggleReg" aria-label="Toggle password visibility">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+              <!-- Password strength -->
+              <div class="pw-strength" id="pwStrength">
+                <div class="pw-strength-bar"><div class="pw-strength-fill" id="pwStrengthFill"></div></div>
+                <span class="pw-strength-label" id="pwStrengthLabel">Weak</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regConfirm">Confirm Password</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-shield-halved input-icon"></i>
+                <input type="password" id="regConfirm" class="form-control" placeholder="Re-enter password" autocomplete="new-password" required />
+              </div>
+            </div>
+
+            <div class="check-row">
+              <input type="checkbox" id="agreeTerms" required />
+              <label for="agreeTerms">
+                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="registerSubmit">
+              <i class="fa-solid fa-user-plus"></i> Create Account
+            </button>
+          </form>
+        </div>
+
+        <!-- ── RESET PASSWORD PANEL ── -->
+        <div id="resetPanel">
+          <button class="back-link" id="backToLoginBtn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Sign In
+          </button>
+          <h2 class="auth-title">Reset <span>Password</span></h2>
+          <p class="auth-subtitle" style="margin-bottom:1.5rem;">Enter your email and we'll send a reset link.</p>
+
+          <form id="resetForm" novalidate>
+            <div class="form-group">
+              <label for="resetEmail">Email Address</label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-envelope input-icon"></i>
+                <input type="email" id="resetEmail" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+              </div>
+            </div>
+            <button type="submit" class="btn-submit" id="resetSubmit">
+              <i class="fa-solid fa-paper-plane"></i> Send Reset Link
+            </button>
+          </form>
+        </div>
+
+      </div><!-- /authPanels -->
+    </div><!-- /auth-card -->
+
+    <!-- Footer -->
+    <div class="auth-footer">
+      <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to MainCrafts Website</a>
+    </div>
+
+  </div><!-- /auth-wrapper -->
+
+  <!-- Firebase Auth Script (ES Module) -->
+  <script type="module">
+    import {
+      registerUser,
+      loginUser,
+      googleSignIn,
+      logoutUser,
+      resetPassword,
+      onAuthChange,
+    } from "./firebase/services/authService.js";
+
+    // ── Helpers ───────────────────────────────────────────────
+    function showAlert(msg, type = "error") {
+      const box  = document.getElementById("authAlert");
+      const icon = document.getElementById("alertIcon");
+      const text = document.getElementById("alertMsg");
+      box.className = `auth-alert show ${type}`;
+      icon.className = type === "error"
+        ? "fa-solid fa-circle-exclamation"
+        : "fa-solid fa-circle-check";
+      text.textContent = msg;
+      setTimeout(() => box.classList.remove("show"), 5000);
+    }
+
+    function clearAlert() {
+      document.getElementById("authAlert").classList.remove("show");
+    }
+
+    function setLoading(btn, loading, originalHTML) {
+      btn.disabled = loading;
+      btn.innerHTML = loading
+        ? '<i class="fa-solid fa-spinner fa-spin"></i> Please wait…'
+        : originalHTML;
+    }
+
+    // ── Tab switching ─────────────────────────────────────────
+    const tabLogin    = document.getElementById("tabLogin");
+    const tabRegister = document.getElementById("tabRegister");
+    const loginPanel  = document.getElementById("loginPanel");
+    const regPanel    = document.getElementById("registerPanel");
+    const resetPanel  = document.getElementById("resetPanel");
+
+    function showLoginTab() {
+      tabLogin.classList.add("active");
+      tabRegister.classList.remove("active");
+      loginPanel.classList.add("active");
+      regPanel.classList.remove("active");
+      resetPanel.classList.remove("active");
+      resetPanel.style.display = "none";
+      loginPanel.style.display = "";
+      regPanel.style.display   = "none";
+      clearAlert();
+    }
+
+    function showRegisterTab() {
+      tabRegister.classList.add("active");
+      tabLogin.classList.remove("active");
+      regPanel.classList.add("active");
+      loginPanel.classList.remove("active");
+      resetPanel.classList.remove("active");
+      resetPanel.style.display = "none";
+      loginPanel.style.display = "none";
+      regPanel.style.display   = "";
+      clearAlert();
+    }
+
+    function showResetPanel() {
+      loginPanel.style.display  = "none";
+      regPanel.style.display    = "none";
+      resetPanel.style.display  = "block";
+      clearAlert();
+    }
+
+    tabLogin.addEventListener("click", showLoginTab);
+    tabRegister.addEventListener("click", showRegisterTab);
+    document.getElementById("showResetBtn").addEventListener("click", showResetPanel);
+    document.getElementById("backToLoginBtn").addEventListener("click", showLoginTab);
+
+    // ── Password toggle ───────────────────────────────────────
+    function initPwToggle(btnId, inputId) {
+      const btn   = document.getElementById(btnId);
+      const input = document.getElementById(inputId);
+      if (!btn || !input) return;
+      btn.addEventListener("click", () => {
+        const isText = input.type === "text";
+        input.type = isText ? "password" : "text";
+        btn.querySelector("i").className = isText
+          ? "fa-solid fa-eye"
+          : "fa-solid fa-eye-slash";
+      });
+    }
+    initPwToggle("pwToggleLogin", "loginPassword");
+    initPwToggle("pwToggleReg",   "regPassword");
+
+    // ── Password strength ─────────────────────────────────────
+    const pwInput      = document.getElementById("regPassword");
+    const strengthWrap = document.getElementById("pwStrength");
+    const strengthFill = document.getElementById("pwStrengthFill");
+    const strengthLbl  = document.getElementById("pwStrengthLabel");
+
+    pwInput.addEventListener("input", () => {
+      const val = pwInput.value;
+      if (!val) { strengthWrap.classList.remove("show"); return; }
+      strengthWrap.classList.add("show");
+
+      let score = 0;
+      if (val.length >= 6)  score++;
+      if (val.length >= 10) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      const levels = [
+        { pct: "20%",  color: "#ef4444", label: "Very weak"  },
+        { pct: "40%",  color: "#f97316", label: "Weak"       },
+        { pct: "60%",  color: "#eab308", label: "Fair"       },
+        { pct: "80%",  color: "#22c55e", label: "Strong"     },
+        { pct: "100%", color: "#10b981", label: "Very strong" },
+      ];
+      const lvl = levels[Math.min(score, 4)];
+      strengthFill.style.width      = lvl.pct;
+      strengthFill.style.background = lvl.color;
+      strengthLbl.textContent       = lvl.label;
+      strengthLbl.style.color       = lvl.color;
+    });
+
+    // ── Auth State ────────────────────────────────────────────
+    onAuthChange((user) => {
+      const welcomePanel = document.getElementById("welcomePanel");
+      const authPanels   = document.getElementById("authPanels");
+
+      if (user) {
+        // Show welcome state
+        welcomePanel.style.display = "block";
+        authPanels.style.display   = "none";
+
+        const avatar = document.getElementById("welcomeAvatar");
+        const name   = document.getElementById("welcomeName");
+        const email  = document.getElementById("welcomeEmail");
+
+        name.textContent  = user.displayName || "Welcome!";
+        email.textContent = user.email;
+
+        // Show photo or initials
+        if (user.photoURL) {
+          avatar.innerHTML = `<img src="${user.photoURL}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;" alt="Profile" />`;
+        } else {
+          const initials = (user.displayName || user.email || "U")
+            .split(" ").map(w => w[0]).join("").slice(0,2).toUpperCase();
+          avatar.textContent = initials;
+        }
+      } else {
+        welcomePanel.style.display = "none";
+        authPanels.style.display   = "block";
+      }
+    });
+
+    // ── Logout ────────────────────────────────────────────────
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await logoutUser();
+    });
+
+    // ── Login Form ────────────────────────────────────────────
+    const loginForm   = document.getElementById("loginForm");
+    const loginSubmit = document.getElementById("loginSubmit");
+    const loginOrig   = loginSubmit.innerHTML;
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAlert();
+      const email    = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      setLoading(loginSubmit, true, loginOrig);
+      const result = await loginUser({ email, password });
+      setLoading(loginSubmit, false, loginOrig);
+
+      if (result.success) {
+        showAlert("Signed in successfully! Redirecting…", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1200);
+      } else {
+        const msg = result.errors ? result.errors.join(" ") : result.error;
+        showAlert(msg, "error");
+      }
+    });
+
+    // ── Register Form ─────────────────────────────────────────
+    const registerForm   = document.getElementById("registerForm");
+    const registerSubmit = document.getElementById("registerSubmit");
+    const regOrig        = registerSubmit.innerHTML;
+
+    registerForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const agreed = document.getElementById("agreeTerms").checked;
+      if (!agreed) { showAlert("Please accept the Terms of Service to continue.", "error"); return; }
+
+      const name     = document.getElementById("regName").value;
+      const email    = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+      const confirm  = document.getElementById("regConfirm").value;
+
+      setLoading(registerSubmit, true, regOrig);
+      const result = await registerUser({ name, email, password, confirm });
+      setLoading(registerSubmit, false, regOrig);
+
+      if (result.success) {
+        showAlert("Account created! Welcome to MainCrafts 🎉", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1400);
+      } else {
+        const msg = result.errors ? result.errors.join(" ") : result.error;
+        showAlert(msg, "error");
+      }
+    });
+
+    // ── Google Sign-In ────────────────────────────────────────
+    async function handleGoogle() {
+      clearAlert();
+      const result = await googleSignIn();
+      if (result.success) {
+        showAlert("Google sign-in successful! Redirecting…", "success");
+        setTimeout(() => { window.location.href = "index.html"; }, 1200);
+      } else {
+        showAlert(result.error || "Google sign-in failed.", "error");
+      }
+    }
+    document.getElementById("googleLoginBtn").addEventListener("click",    handleGoogle);
+    document.getElementById("googleRegisterBtn").addEventListener("click", handleGoogle);
+
+    // ── Password Reset ────────────────────────────────────────
+    const resetForm   = document.getElementById("resetForm");
+    const resetSubmit = document.getElementById("resetSubmit");
+    const resetOrig   = resetSubmit.innerHTML;
+
+    resetForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("resetEmail").value;
+
+      setLoading(resetSubmit, true, resetOrig);
+      const result = await resetPassword(email);
+      setLoading(resetSubmit, false, resetOrig);
+
+      if (result.success) {
+        showAlert("Reset link sent! Check your inbox.", "success");
+        setTimeout(showLoginTab, 2500);
+      } else {
+        showAlert(result.error || "Failed to send reset email.", "error");
+      }
+    });
+  </script>
+
+</body>
+</html>
